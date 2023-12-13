@@ -1,7 +1,16 @@
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('node:path');
 
 let win = null;
+
+// Function to make the window flash and stay on top
+const flashWindow = () => {
+  win.maximize();
+  win.setAlwaysOnTop(true);
+  win.show();
+  win.setAlwaysOnTop(false);
+  app.focus();
+};
 
 const createWindow = () => {
   win = new BrowserWindow({
@@ -10,6 +19,10 @@ const createWindow = () => {
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
     },
+  });
+
+  ipcMain.on('taskFinish', (event, payload) => {
+    flashWindow();
   });
 
   win.loadFile('index.html');
@@ -34,9 +47,3 @@ app.whenReady().then(createWindow);
 //     }
 //   });
 // });
-
-// Function to make the window flash and stay on top
-function flashWindow() {
-  win.flashFrame(true); // Flash the window
-  win.setAlwaysOnTop(true); // Set the window to always be on top
-}
