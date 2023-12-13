@@ -1,8 +1,10 @@
 const { app, BrowserWindow } = require('electron');
-const path = require('node:path')
+const path = require('node:path');
+
+let win = null;
 
 const createWindow = () => {
-  const win = new BrowserWindow({
+  win = new BrowserWindow({
     width: 800,
     height: 600,
     webPreferences: {
@@ -33,4 +35,8 @@ app.whenReady().then(createWindow);
 //   });
 // });
 
-12
+// Function to make the window flash and stay on top
+function flashWindow() {
+  win.flashFrame(true); // Flash the window
+  win.setAlwaysOnTop(true); // Set the window to always be on top
+}
