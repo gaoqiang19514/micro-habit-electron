@@ -1,7 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import classNames from 'classnames';
 
+import * as taskApi from './apis/task';
+import * as recordApi from './apis/record';
+
 import './App.css';
+
+const username = 'tomcat';
 
 const countDown = (endTime, callback) => {
   const countdownHelper = () => {
@@ -23,12 +28,61 @@ function App() {
   const [countDownSeconds, setCountDownSeconds] = useState(0);
   const [currentName, setCurrentName] = useState('');
   const [currentTime, setCurrentTime] = useState('');
-  const [names, setNames] = useState(['前端', '英语']);
+  const [names, setNames] = useState([]);
   const [times, setTimes] = useState([0.1, 5, 10, 15, 20, 25]);
+  const [tasks, setTasks] = useState([]);
 
   const syncOriginData = (name, time) => {
-    console.log('name', name);
-    console.log('time', time);
+    const task = tasks.find((task) => task.name === name);
+
+    if (!task) {
+      throw new Error('syncOriginData()调用失败，无法匹配到远程任务');
+    }
+
+    const target = task.target;
+    const now = '2023-12-15';
+
+    recordApi
+      .get({
+        name,
+        username,
+        date: now,
+      })
+      .then((data) => {
+        const records = data.data;
+        const len = records.length;
+
+        if (len === 0) {
+          recordApi.add({
+            // 任务名
+            name,
+            // 时间
+            time,
+            // 用户名
+            username,
+            // 当天时间
+            date: now,
+            // 目标时间
+            target,
+          });
+          return;
+        }
+
+        if (len === 1) {
+          recordApi.update({
+            query: {
+              date: now,
+              name,
+            },
+            payload: {
+              value: records[0].value + time,
+            },
+          });
+          return;
+        }
+
+        throw new Error('syncOriginData()调用失败，匹配到多条record');
+      });
   };
 
   const onStart = () => {
@@ -60,6 +114,14 @@ function App() {
   const onFinished = () => {
     setStatus('1');
   };
+
+  useEffect(() => {
+    taskApi.get(username).then((data) => {
+      const tasks = data.data;
+      setTasks(tasks);
+      setNames(tasks.map((item) => item.name));
+    });
+  }, []);
 
   const isDisabled = !currentName || !currentTime;
 
