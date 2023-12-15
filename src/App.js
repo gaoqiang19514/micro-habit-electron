@@ -65,7 +65,6 @@ function App() {
 
   return (
     <div className="container">
-      status{status}
       {status === '1' && (
         <>
           <div className="row">
