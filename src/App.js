@@ -6,6 +6,22 @@ import * as recordApi from './apis/record';
 
 import './App.css';
 
+/**
+ * 表示特定日期格式 "YYYY-MM-DD" 的日期字符串
+ * @typedef {string} DateFormat
+ */
+
+/**
+ * 打卡记录
+ * @typedef {object} Record
+ * @property {string} _id
+ * @property {string} name
+ * @property {DateFormat} date
+ * @property {number} value
+ * @property {number} target
+ * @property {string} username
+ */
+
 const username = 'tomcat';
 
 const countDown = (endTime, callback) => {
@@ -19,6 +35,19 @@ const countDown = (endTime, callback) => {
 
   countdownHelper();
 };
+
+/**
+ * 获取当天的年月日
+ * @param {Date} date
+ * @returns {DateFormat}
+ */
+function formatter(date) {
+  const year = date.getFullYear();
+  const month = (1 + date.getMonth()).toString().padStart(2, '0');
+  const day = date.getDate().toString().padStart(2, '0');
+
+  return year + '-' + month + '-' + day;
+}
 
 function App() {
   // 1 默认状态
@@ -40,7 +69,7 @@ function App() {
     }
 
     const target = task.target;
-    const now = '2023-12-15';
+    const now = formatter(new Date());
 
     recordApi
       .get({
@@ -49,7 +78,9 @@ function App() {
         date: now,
       })
       .then((data) => {
+        /** @type {Record[]} */
         const records = data.data;
+        /** @type {number} */
         const len = records.length;
 
         if (len === 0) {
@@ -62,6 +93,7 @@ function App() {
             username,
             // 当天时间
             date: now,
+            value: time,
             // 目标时间
             target,
           });
@@ -69,13 +101,15 @@ function App() {
         }
 
         if (len === 1) {
+          const [record] = records
           recordApi.update({
             query: {
-              date: now,
               name,
+              date: now,
+              username,
             },
             payload: {
-              value: records[0].value + time,
+              value: record.value + time,
             },
           });
           return;
