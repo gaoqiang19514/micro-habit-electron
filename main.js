@@ -23,8 +23,8 @@ const createWindow = () => {
     flashWindow();
   });
 
-  // win.loadURL('http://localhost:3000/');
   win.loadFile('build/index.html');
+  // win.loadURL('http://localhost:3000/');
 };
 
 app.whenReady().then(createWindow);
