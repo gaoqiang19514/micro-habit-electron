@@ -24,7 +24,28 @@ import './App.css';
  * @property {string} username
  */
 
+/**
+ * 将秒数格式化为12:20这样的时间格式
+ * @param {number} seconds 
+ * @returns {string}
+ */
+const formatSeconds = (seconds) => {
+  const minutes = Math.floor(seconds / 60);
+  const remainingSeconds = seconds % 60;
 
+  // 使用padStart确保分钟和秒数始终是两位数
+  const formattedMinutes = minutes.toString().padStart(2, '0');
+  const formattedSeconds = remainingSeconds.toString().padStart(2, '0');
+
+  return formattedMinutes + ':' + formattedSeconds;
+};
+
+/**
+ * 倒计时
+ * @param {number} endTime
+ * @param {function} callback
+ * @returns {string}
+ */
 const countDown = (endTime, callback) => {
   const countdownHelper = () => {
     const currentTime = new Date().getTime();
@@ -245,7 +266,7 @@ function App() {
           </button>
         </>
       )}
-      {status === '2' && <div className="countDownValue">{countDownSeconds}</div>}
+      {status === '2' && <div className="countDownValue">{formatSeconds(countDownSeconds)}</div>}
       {status === '3' && (
         <div>
           <div className="congratulation">恭喜，任务完成！</div>
