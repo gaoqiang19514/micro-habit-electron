@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import classNames from 'classnames';
+import { useNavigate } from 'react-router-dom';
 
 import * as taskApi from './apis/task';
 import * as recordApi from './apis/record';
@@ -22,7 +23,6 @@ import './App.css';
  * @property {string} username
  */
 
-const username = 'tomcat';
 
 const countDown = (endTime, callback) => {
   const countdownHelper = () => {
@@ -60,6 +60,9 @@ function App() {
   const [names, setNames] = useState([]);
   const [times, setTimes] = useState([0.1, 5, 10, 15, 20, 25]);
   const [tasks, setTasks] = useState([]);
+  const navigate = useNavigate();
+  const username = localStorage.getItem('username') || '';
+  const isDisabled = !currentName || !currentTime;
 
   const syncOriginData = (name, time) => {
     const task = tasks.find((task) => task.name === name);
@@ -145,22 +148,36 @@ function App() {
     });
   };
 
+  const onLogout = () => {
+    localStorage.removeItem('username')
+    navigate('/login');
+  }
+
   const onFinished = () => {
     setStatus('1');
   };
 
   useEffect(() => {
-    taskApi.get(username).then((data) => {
+    taskApi.list(username).then((data) => {
       const tasks = data.data;
       setTasks(tasks);
       setNames(tasks.map((item) => item.name));
     });
   }, []);
 
-  const isDisabled = !currentName || !currentTime;
+  useEffect(() => {
+    if (!username) {
+      navigate('/login');
+    }
+  }, [])
+
 
   return (
     <div className="container">
+      <div>
+        <div>{username}</div>
+        <div onClick={onLogout}>退出登录</div>
+      </div>
       {status === '1' && (
         <>
           <div className="row">

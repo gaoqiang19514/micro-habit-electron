@@ -1,0 +1,21 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.input {
+  border: 0;
+  width: 100%;
+  display: block;
+  padding: 10px;
+}
+
+.input-box {
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+}
+
+.btn {
+  display: block;
+}

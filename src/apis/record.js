@@ -5,14 +5,14 @@ export const get = ({ username, name, date }) => {
 };
 
 export const add = (payload) => {
-  return fetch(`${BASE_URL}/add`, {
+  return fetch(`${BASE_URL}/addRecord`, {
     method: 'POST',
     body: JSON.stringify(payload),
   });
 };
 
 export const update = (payload) => {
-  return fetch(`${BASE_URL}/update`, {
+  return fetch(`${BASE_URL}/updateRecord`, {
     method: 'POST',
     body: JSON.stringify(payload),
   });
