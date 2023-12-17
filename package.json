@@ -22,12 +22,12 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "start-electron": "electron .",
+    "start-e": "set type=dev && electron .",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "package": "electron-forge package",
-    "make": "electron-forge make"
+    "make": "set type=prod && electron-forge make"
   },
   "eslintConfig": {
     "extends": [

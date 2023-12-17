@@ -3,6 +3,8 @@ const path = require('node:path');
 
 let win = null;
 
+console.log('process.env.type', process.env.type)
+
 const flashWindow = () => {
   win.setAlwaysOnTop(true);
   win.show();
@@ -23,8 +25,11 @@ const createWindow = () => {
     flashWindow();
   });
 
-  win.loadFile('build/index.html');
-  // win.loadURL('http://localhost:3000/');
+  if (process.env.type === 'dev') {
+    win.loadURL('http://localhost:3000/');
+  } else {
+    win.loadFile('build/index.html');
+  }
 };
 
 app.whenReady().then(createWindow);
