@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 import * as taskApi from './apis/task';
 import * as recordApi from './apis/record';
-import audio from './assets/audio.mp3'
+import audio from './assets/Yoann Garel, Aphrow - Love Departure.mp3'
 
 import './App.css';
 
@@ -188,6 +188,8 @@ function App() {
   }
 
   const onFinished = () => {
+    musicPlayer.pause();
+    musicPlayer.currentTime = 0
     setStatus('1');
   };
 
