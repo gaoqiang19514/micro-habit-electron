@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 import * as taskApi from './apis/task';
 import * as recordApi from './apis/record';
+import audio from './assets/audio.mp3'
 
 import './App.css';
 
@@ -63,6 +64,7 @@ function App() {
   const navigate = useNavigate();
   const username = localStorage.getItem('username') || '';
   const isDisabled = !currentName || !currentTime;
+  const musicPlayer = document.getElementById('musicPlayer')
 
   const syncOriginData = (name, time) => {
     const task = tasks.find((task) => task.name === name);
@@ -144,9 +146,20 @@ function App() {
         setStatus('3');
         clearTimeout(timer);
         syncOriginData(currentName, currentTime);
+        remind();
       }
     });
   };
+
+  const remind = () => {
+    musicPlayer.play();
+
+    if (window.electronAPI) {
+      window.electronAPI.taskFinish({
+        data: 'ok',
+      });
+    }
+  }
 
   const onLogout = () => {
     localStorage.removeItem('username')
@@ -171,13 +184,24 @@ function App() {
     }
   }, [])
 
-
   return (
     <div className="container">
       <div>
         <div>{username}</div>
         <div onClick={onLogout}>退出登录</div>
       </div>
+      <audio
+        style={{ display: 'none' }}
+        id="musicPlayer"
+        controls
+      >
+        <source
+          src={audio}
+          type="audio/mpeg"
+        />
+        Your browser does not support the audio tag.
+      </audio>
+
       {status === '1' && (
         <>
           <div className="row">
