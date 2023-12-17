@@ -35,7 +35,7 @@ ul {
 .container {
   width: 500px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 100px 20px 0 20px;
 }
 
 .btn {
@@ -52,4 +52,29 @@ ul {
 .congratulation {
   text-align: center;
   margin-bottom: 20px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.right {
+  display: flex;
+}
+
+.cell {
+  padding: 10px;
+}
+
+.btn {
+  cursor: pointer;
+
 }

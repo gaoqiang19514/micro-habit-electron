@@ -207,9 +207,12 @@ function App() {
 
   return (
     <div className="container">
-      <div>
-        <div>{username}</div>
-        <div onClick={onLogout}>退出登录</div>
+      <div className='header'>
+        <div className='title'>番茄</div>
+        <div className='right'>
+          <div className='cell'>{username}</div>
+          <div className='cell btn' onClick={onLogout}>退出登录</div>
+        </div>
       </div>
       <audio
         style={{ display: 'none' }}

@@ -37,7 +37,7 @@ function Login() {
   return (
     <div className="container">
       <div className='input-box'>
-        <input className='input' value={username} onChange={(e) => setUsername(e.target.value)} placeholder='账号' />
+        <input className='input' value={username} onKeyUp={(e) => e.keyCode === 13 && onSubmit()} onChange={(e) => setUsername(e.target.value)} placeholder='账号' />
       </div>
       <div className='input-box'>
         <input className='input' value={password} onChange={(e) => setPassword(e.target.value)} placeholder='密码' />
