@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain } = require('electron');
+const { app, BrowserWindow, ipcMain, Menu } = require('electron');
 const path = require('node:path');
 
 let win = null;
@@ -13,6 +13,9 @@ const flashWindow = () => {
 };
 
 const createWindow = () => {
+  if (app.isPackaged) {
+    Menu.setApplicationMenu(null)
+  }
   win = new BrowserWindow({
     width: 800,
     height: 600,
@@ -26,10 +29,10 @@ const createWindow = () => {
     flashWindow();
   });
 
-  if (process.env.type === 'dev') {
-    win.loadURL('http://localhost:3000/');
-  } else {
+  if (app.isPackaged) {
     win.loadFile('build/index.html');
+  } else {
+    win.loadURL('http://localhost:3000/');
   }
 };
 
