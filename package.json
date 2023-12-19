@@ -8,6 +8,7 @@
   "homepage": ".",
   "private": true,
   "dependencies": {
+    "@douyinfe/semi-ui": "^2.49.1",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -21,11 +22,9 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "electron-forge start",
-    "start-e": "set type=dev && electron .",
+    "start": "react-scripts start",
+    "start-e": "electron-forge start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
     "icon": "electron-icon-builder --input=./src/assets/tomato.png --flatten",
     "package": "electron-forge package",
     "make": "electron-forge make",

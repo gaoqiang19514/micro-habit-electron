@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 import * as taskApi from './apis/task';
 import * as recordApi from './apis/record';
-import audio from './assets/Yoann Garel, Aphrow - Love Departure.mp3'
+import audio from './assets/Yoann Garel, Aphrow - Love Departure.mp3';
 
 import './App.css';
 
@@ -26,7 +26,7 @@ import './App.css';
 
 /**
  * 将秒数格式化为12:20这样的时间格式
- * @param {number} seconds 
+ * @param {number} seconds
  * @returns {string}
  */
 const formatSeconds = (seconds) => {
@@ -85,7 +85,7 @@ function App() {
   const navigate = useNavigate();
   const username = localStorage.getItem('username') || '';
   const isDisabled = !currentName || !currentTime;
-  const musicPlayer = document.getElementById('musicPlayer')
+  const musicPlayer = document.getElementById('musicPlayer');
 
   const syncOriginData = (name, time) => {
     const task = tasks.find((task) => task.name === name);
@@ -127,7 +127,7 @@ function App() {
         }
 
         if (len === 1) {
-          const [record] = records
+          const [record] = records;
           recordApi.update({
             query: {
               name,
@@ -180,16 +180,16 @@ function App() {
         data: 'ok',
       });
     }
-  }
+  };
 
   const onLogout = () => {
-    localStorage.removeItem('username')
+    localStorage.removeItem('username');
     navigate('/login');
-  }
+  };
 
   const onFinished = () => {
     musicPlayer.pause();
-    musicPlayer.currentTime = 0
+    musicPlayer.currentTime = 0;
     setStatus('1');
   };
 
@@ -199,21 +199,26 @@ function App() {
       setTasks(tasks);
       setNames(tasks.map((item) => item.name));
     });
-  }, []);
+  }, [username]);
 
   useEffect(() => {
     if (!username) {
       navigate('/login');
     }
-  }, [])
+  }, [username, navigate]);
 
   return (
     <div className="container">
-      <div className='header'>
-        <div className='title'>番茄</div>
-        <div className='right'>
-          <div className='cell'>{username}</div>
-          <div className='cell btn' onClick={onLogout}>退出登录</div>
+      <div className="header">
+        <div className="title">番茄</div>
+        <div className="right">
+          <div className="cell">{username}</div>
+          <div
+            className="cell btn"
+            onClick={onLogout}
+          >
+            退出登录
+          </div>
         </div>
       </div>
       <audio
@@ -288,4 +293,3 @@ function App() {
 }
 
 export default App;
-
