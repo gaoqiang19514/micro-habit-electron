@@ -4,7 +4,9 @@ import { Button, Input } from '@douyinfe/semi-ui';
 
 import * as userApi from '../../apis/user';
 
-import './index.css';
+import styles from './index.less';
+
+console.log('styles', styles)
 
 function Login() {
   const navigate = useNavigate();
@@ -40,7 +42,7 @@ function Login() {
 
   return (
     <div className="container">
-      <div className="content">
+      <div className={styles.content}>
         <h1 className="title">微习惯</h1>
         <Input
           className="input"

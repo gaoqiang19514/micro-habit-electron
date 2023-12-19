@@ -13,6 +13,7 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "classnames": "^2.3.2",
+    "craco-less": "^3.0.1",
     "electron-icon-builder": "^2.0.1",
     "electron-squirrel-startup": "^1.0.0",
     "react": "^18.2.0",
@@ -22,9 +23,9 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "craco start",
+    "build": "craco build",
     "start-e": "electron-forge start",
-    "build": "react-scripts build",
     "icon": "electron-icon-builder --input=./src/assets/tomato.png --flatten",
     "package": "electron-forge package",
     "make": "electron-forge make",
@@ -49,12 +50,15 @@
     ]
   },
   "devDependencies": {
+    "@craco/craco": "^7.1.0",
     "@electron-forge/cli": "^7.2.0",
     "@electron-forge/maker-deb": "^7.2.0",
     "@electron-forge/maker-rpm": "^7.2.0",
     "@electron-forge/maker-squirrel": "^7.2.0",
     "@electron-forge/maker-zip": "^7.2.0",
     "@electron-forge/plugin-auto-unpack-natives": "^7.2.0",
-    "electron": "^28.0.0"
+    "electron": "^28.0.0",
+    "less": "^4.2.0",
+    "less-loader": "^11.1.3"
   }
 }
