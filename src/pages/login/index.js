@@ -38,7 +38,7 @@ function Login() {
   };
 
   return (
-    <div className="container">
+    <div className={styles.container}>
       <div className={styles.content}>
         <h1 className={styles.title}>微习惯</h1>
         <Input
