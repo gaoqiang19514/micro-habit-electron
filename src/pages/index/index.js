@@ -203,7 +203,8 @@ function App() {
 
   useEffect(() => {
     if (!username) {
-      navigate('/login');
+      // 这个跳转要不留历史
+      navigate(`/login?redirect_url=${window.location.href}`);
     }
   }, [username, navigate]);
 
