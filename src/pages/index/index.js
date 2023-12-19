@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import classNames from 'classnames';
 import { useNavigate } from 'react-router-dom';
 
-import * as taskApi from './apis/task';
-import * as recordApi from './apis/record';
-import audio from './assets/Yoann Garel, Aphrow - Love Departure.mp3';
+import * as taskApi from '../../apis/task';
+import * as recordApi from '../../apis/record';
+import audio from '../../assets/Yoann Garel, Aphrow - Love Departure.mp3';
 
-import './App.css';
+import styles from './style.less';
 
 /**
  * 表示特定日期格式 "YYYY-MM-DD" 的日期字符串
@@ -208,13 +208,13 @@ function App() {
   }, [username, navigate]);
 
   return (
-    <div className="container">
-      <div className="header">
-        <div className="title">番茄</div>
-        <div className="right">
-          <div className="cell">{username}</div>
+    <div className={styles.container}>
+      <div className={styles.header}>
+        <div className={styles.title}>番茄</div>
+        <div className={styles.right}>
+          <div className={styles.cell}>{username}</div>
           <div
-            className="cell btn"
+            className={`${styles.cell} ${styles.btn}`}
             onClick={onLogout}
           >
             退出登录
@@ -235,13 +235,13 @@ function App() {
 
       {status === '1' && (
         <>
-          <div className="row">
+          <div className={styles.row}>
             <div>任务：</div>
-            <ul className="options">
+            <ul className={styles.options}>
               {names.map((name) => (
                 <li
-                  className={classNames('option', {
-                    current: name === currentName,
+                  className={classNames(styles.option, {
+                    [`${styles.current}`]: name === currentName,
                   })}
                   key={name}
                   onClick={() => setCurrentName(name)}
@@ -251,13 +251,13 @@ function App() {
               ))}
             </ul>
           </div>
-          <div className="row">
+          <div className={styles.row}>
             <div>时间：</div>
-            <ul className="options">
+            <ul className={styles.options}>
               {times.map((time) => (
                 <li
-                  className={classNames('option', {
-                    current: time === currentTime,
+                  className={classNames(styles.option, {
+                    [`${styles.current}`]: time === currentTime,
                   })}
                   key={time}
                   onClick={() => setCurrentTime(time)}
@@ -268,7 +268,7 @@ function App() {
             </ul>
           </div>
           <button
-            className="btn"
+            className={styles.btn}
             disabled={isDisabled}
             onClick={onStart}
           >
@@ -276,12 +276,12 @@ function App() {
           </button>
         </>
       )}
-      {status === '2' && <div className="countDownValue">{formatSeconds(countDownSeconds)}</div>}
+      {status === '2' && <div className={styles.countDownValue}>{formatSeconds(countDownSeconds)}</div>}
       {status === '3' && (
         <div>
-          <div className="congratulation">恭喜，任务完成！</div>
+          <div className={styles.congratulation}>恭喜，任务完成！</div>
           <button
-            className="btn"
+            className={styles.btn}
             onClick={onFinished}
           >
             确定

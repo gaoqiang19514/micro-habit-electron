@@ -3,10 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Button, Input } from '@douyinfe/semi-ui';
 
 import * as userApi from '../../apis/user';
-
-import styles from './index.less';
-
-console.log('styles', styles)
+import styles from './style.less';
 
 function Login() {
   const navigate = useNavigate();
@@ -43,16 +40,16 @@ function Login() {
   return (
     <div className="container">
       <div className={styles.content}>
-        <h1 className="title">微习惯</h1>
+        <h1 className={styles.title}>微习惯</h1>
         <Input
-          className="input"
+          className={styles.input}
           value={username}
           onKeyUp={(e) => e.keyCode === 13 && onSubmit()}
           onChange={setUsername}
           placeholder="账号"
         />
         <Input
-          className="input"
+          className={styles.input}
           type="password"
           value={password}
           onChange={setPassword}

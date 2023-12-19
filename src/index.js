@@ -6,14 +6,14 @@ import {
 } from "react-router-dom";
 
 import './index.css';
-import App from './App';
+import Index from './pages/index';
 import Login from './pages/login';
 import reportWebVitals from './reportWebVitals';
 
 const router = createHashRouter([
   {
     path: "/",
-    element: <App />,
+    element: <Index />,
   },
   {
     path: "/login",
