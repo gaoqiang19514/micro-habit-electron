@@ -3,8 +3,6 @@ const path = require('node:path');
 
 let win = null;
 
-console.log('process.env.type', process.env.type)
-
 const flashWindow = () => {
   win.setAlwaysOnTop(true);
   win.show();
