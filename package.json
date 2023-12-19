@@ -8,7 +8,6 @@
   "homepage": ".",
   "private": true,
   "dependencies": {
-    "@electron-forge/cli": "^7.2.0",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -22,15 +21,15 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "electron-forge start",
     "start-e": "set type=dev && electron .",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
+    "icon": "electron-icon-builder --input=./src/assets/tomato.png --flatten",
     "package": "electron-forge package",
-    "make": "set type=prod && electron-forge make",
-    "go": "yarn icon && yarn build && yarn make",
-    "icon": "electron-icon-builder --input=./src/assets/tomato.png --flatten"
+    "make": "electron-forge make",
+    "go": "npm install && npm run icon && npm run build && npm run make"
   },
   "eslintConfig": {
     "extends": [
@@ -51,6 +50,7 @@
     ]
   },
   "devDependencies": {
+    "@electron-forge/cli": "^7.2.0",
     "@electron-forge/maker-deb": "^7.2.0",
     "@electron-forge/maker-rpm": "^7.2.0",
     "@electron-forge/maker-squirrel": "^7.2.0",
