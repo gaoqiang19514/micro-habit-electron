@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import classNames from 'classnames';
 import { useNavigate } from 'react-router-dom';
+import { Form, Button, RadioGroup, Radio, Dropdown } from '@douyinfe/semi-ui';
 
 import * as taskApi from '../../apis/task';
 import * as recordApi from '../../apis/record';
@@ -211,16 +211,16 @@ function App() {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <div className={styles.title}>番茄</div>
-        <div className={styles.right}>
-          <div className={styles.cell}>{username}</div>
-          <div
-            className={`${styles.cell} ${styles.btn}`}
-            onClick={onLogout}
-          >
-            退出登录
-          </div>
-        </div>
+        <div className={styles.title}>番茄时钟</div>
+        <Dropdown
+          render={
+            <Dropdown.Menu>
+              <Dropdown.Item onClick={onLogout}>退出登录</Dropdown.Item>
+            </Dropdown.Menu>
+          }
+        >
+          <Button>{username}</Button>
+        </Dropdown>
       </div>
       <audio
         style={{ display: 'none' }}
@@ -233,60 +233,65 @@ function App() {
         />
         Your browser does not support the audio tag.
       </audio>
-
-      {status === '1' && (
-        <>
-          <div className={styles.row}>
-            <div>任务：</div>
-            <ul className={styles.options}>
-              {names.map((name) => (
-                <li
-                  className={classNames(styles.option, {
-                    [`${styles.current}`]: name === currentName,
-                  })}
-                  key={name}
-                  onClick={() => setCurrentName(name)}
-                >
-                  {name}
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className={styles.row}>
-            <div>时间：</div>
-            <ul className={styles.options}>
-              {times.map((time) => (
-                <li
-                  className={classNames(styles.option, {
-                    [`${styles.current}`]: time === currentTime,
-                  })}
-                  key={time}
-                  onClick={() => setCurrentTime(time)}
-                >
-                  {time}分钟
-                </li>
-              ))}
-            </ul>
-          </div>
-          <button
-            className={styles.btn}
-            disabled={isDisabled}
-            onClick={onStart}
-          >
-            启动
-          </button>
-        </>
+      <div className={styles.row}>
+        <Form.Label>任务:</Form.Label>
+        <RadioGroup
+          type="button"
+          value={currentName}
+          onChange={(e) => setCurrentName(e.target.value)}
+        >
+          {names.map((item) => (
+            <Radio
+              key={item}
+              value={item}
+            >
+              {item}
+            </Radio>
+          ))}
+        </RadioGroup>
+      </div>
+      <div className={styles.row}>
+        <Form.Label>时间:</Form.Label>
+        <RadioGroup
+          type="button"
+          value={currentTime}
+          onChange={(e) => setCurrentTime(e.target.value)}
+        >
+          {times.map((item) => (
+            <Radio
+              key={item}
+              value={item}
+            >
+              {item}分钟
+            </Radio>
+          ))}
+        </RadioGroup>
+      </div>
+      <Button
+        block
+        theme="solid"
+        type="primary"
+        disabled={isDisabled}
+        onClick={onStart}
+      >
+        启动
+      </Button>
+      {status === '2' && (
+        <div className={`${styles.mask} ${styles.countDownValue}`}>{formatSeconds(countDownSeconds)}</div>
       )}
-      {status === '2' && <div className={styles.countDownValue}>{formatSeconds(countDownSeconds)}</div>}
       {status === '3' && (
-        <div>
-          <div className={styles.congratulation}>恭喜，任务完成！</div>
-          <button
-            className={styles.btn}
-            onClick={onFinished}
-          >
-            确定
-          </button>
+        <div className={styles.mask}>
+          <div>
+            <div className={styles.congratulation}>恭喜，任务完成！</div>
+            <Button
+              block
+              theme="solid"
+              type="primary"
+              onClick={onFinished}
+            >
+              确定
+            </Button>
+          </div>
         </div>
       )}
     </div>
