@@ -156,6 +156,7 @@ function App() {
         clearTimeout(timer);
         syncOriginData(currentName, currentTime);
         remind();
+        localStorage.removeItem(SAVE_KEY);
       }
     });
   };
@@ -214,7 +215,10 @@ function App() {
   useEffect(() => {
     const payload = JSON.parse(localStorage.getItem(SAVE_KEY));
 
-    console.log('payload', payload);
+    // console.log('payload', payload);
+    // if (payload) {
+    //   start(payload);
+    // }
   }, []);
 
   useEffect(() => {
