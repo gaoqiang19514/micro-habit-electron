@@ -8,6 +8,7 @@ import {
 import './index.css';
 import Index from './pages/index';
 import Login from './pages/login';
+import Register from './pages/register';
 import reportWebVitals from './reportWebVitals';
 
 const router = createHashRouter([
@@ -18,6 +19,10 @@ const router = createHashRouter([
   {
     path: "/login",
     element: <Login />,
+  },
+  {
+    path: "/register",
+    element: <Register />,
   },
 ]);
 
