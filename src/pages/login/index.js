@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, Input } from '@douyinfe/semi-ui';
 
-import * as userApi from '../../apis/user';
+import * as userApi from '@/apis/user';
 import styles from './style.less';
 
 function Login() {

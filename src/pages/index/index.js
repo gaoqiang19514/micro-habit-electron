@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Form, Button, RadioGroup, Radio, Dropdown } from '@douyinfe/semi-ui';
 
-import * as taskApi from '../../apis/task';
-import * as recordApi from '../../apis/record';
-import audio from '../../assets/Yoann Garel, Aphrow - Love Departure.mp3';
+import * as taskApi from '@/apis/task';
+import * as recordApi from '@/apis/record';
+import audio from '@/assets/Yoann Garel, Aphrow - Love Departure.mp3';
 
 import styles from './style.less';
 
