@@ -187,7 +187,7 @@ function App() {
 
   const onLogout = () => {
     localStorage.removeItem('username');
-    navigate('/login');
+    navigate('/login', { replace: true });
   };
 
   const onFinished = () => {
