@@ -80,7 +80,7 @@ function App() {
   const [currentName, setCurrentName] = useState('');
   const [currentTime, setCurrentTime] = useState('');
   const [names, setNames] = useState([]);
-  const [times, setTimes] = useState([5, 10, 15, 20, 25]);
+  const [times] = useState([5, 10, 15, 20, 25]);
   const [tasks, setTasks] = useState([]);
   const navigate = useNavigate();
   const username = localStorage.getItem('username') || '';
@@ -222,17 +222,6 @@ function App() {
           <Button>{username}</Button>
         </Dropdown>
       </div>
-      <audio
-        style={{ display: 'none' }}
-        id="musicPlayer"
-        controls
-      >
-        <source
-          src={audio}
-          type="audio/mpeg"
-        />
-        Your browser does not support the audio tag.
-      </audio>
       <div className={styles.row}>
         <Form.Label>任务:</Form.Label>
         <RadioGroup
@@ -282,7 +271,7 @@ function App() {
       {status === '3' && (
         <div className={styles.mask}>
           <div>
-            <div className={styles.congratulation}>恭喜，任务完成！</div>
+            <div className={styles.finished}>恭喜，任务完成！</div>
             <Button
               block
               theme="solid"
@@ -294,6 +283,18 @@ function App() {
           </div>
         </div>
       )}
+
+      <audio
+        style={{ display: 'none' }}
+        id="musicPlayer"
+        controls
+      >
+        <source
+          src={audio}
+          type="audio/mpeg"
+        />
+        Your browser does not support the audio tag.
+      </audio>
     </div>
   );
 }

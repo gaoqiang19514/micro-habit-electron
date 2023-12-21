@@ -15,8 +15,8 @@ const createWindow = () => {
     Menu.setApplicationMenu(null)
   }
   win = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 700,
+    height: 450,
     icon: path.join(__dirname, 'icons/icon.ico'),
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),

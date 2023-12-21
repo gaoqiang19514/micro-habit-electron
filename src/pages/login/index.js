@@ -39,32 +39,32 @@ function Login() {
 
   return (
     <div className={styles.container}>
-      <div className={styles.content}>
-        <h1 className={styles.title}>微习惯</h1>
-        <Input
-          className={styles.input}
-          value={username}
-          onKeyUp={(e) => e.keyCode === 13 && onSubmit()}
-          onChange={setUsername}
-          placeholder="账号"
-        />
-        <Input
-          className={styles.input}
-          type="password"
-          value={password}
-          onChange={setPassword}
-          placeholder="密码"
-        />
-        <div>
-          <Button
-            block
-            loading={loading}
-            disabled={isDisabled}
-            onClick={onSubmit}
-          >
-            登录/注册
-          </Button>
-        </div>
+      <h1 className={styles.title}>微习惯</h1>
+      <Input
+        className={styles.input}
+        value={username}
+        onKeyUp={(e) => e.keyCode === 13 && onSubmit()}
+        onChange={setUsername}
+        placeholder="账号"
+      />
+      <Input
+        className={styles.input}
+        type="password"
+        value={password}
+        onChange={setPassword}
+        placeholder="密码"
+      />
+      <div>
+        <Button
+          block
+          theme="solid"
+          type="primary"
+          loading={loading}
+          disabled={isDisabled}
+          onClick={onSubmit}
+        >
+          登录/注册
+        </Button>
       </div>
     </div>
   );
