@@ -2,7 +2,6 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      // 这里配置的目的是让vscode自动识别路径别名，给出路径提示
       "@/*": ["src/*"]
     }
   }

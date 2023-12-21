@@ -10,3 +10,10 @@ export const add = (payload) => {
     body: JSON.stringify(payload),
   });
 };
+
+export const login = (payload) => {
+  return fetch(`${BASE_URL}/login`, {
+    method: 'POST',
+    body: JSON.stringify(payload),
+  });
+};

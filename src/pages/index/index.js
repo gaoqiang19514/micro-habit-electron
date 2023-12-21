@@ -71,6 +71,8 @@ function formatter(date) {
   return year + '-' + month + '-' + day;
 }
 
+const SAVE_KEY = 'countdown';
+
 function App() {
   // 1 默认状态
   // 2 倒计时中
@@ -145,6 +147,23 @@ function App() {
       });
   };
 
+  const start = ({ endTime, currentName, currentTime }) => {
+    setStatus('2');
+    countDown(endTime, (seconds, timer) => {
+      setCountDownSeconds(seconds);
+      if (seconds <= 0) {
+        setStatus('3');
+        clearTimeout(timer);
+        syncOriginData(currentName, currentTime);
+        remind();
+      }
+    });
+  };
+
+  const save = (payload) => {
+    localStorage.setItem(SAVE_KEY, JSON.stringify(payload));
+  };
+
   const onStart = () => {
     if (!currentName) {
       alert('请选择任务');
@@ -159,17 +178,8 @@ function App() {
     const durationMillisecond = currentTime * 60 * 1000;
     const endTime = new Date().getTime() + durationMillisecond;
 
-    setStatus('2');
-
-    countDown(endTime, (seconds, timer) => {
-      setCountDownSeconds(seconds);
-      if (seconds <= 0) {
-        setStatus('3');
-        clearTimeout(timer);
-        syncOriginData(currentName, currentTime);
-        remind();
-      }
-    });
+    save({ endTime, currentName, currentTime });
+    start({ endTime, currentName, currentTime });
   };
 
   const remind = () => {
@@ -200,6 +210,12 @@ function App() {
       setNames(tasks.map((item) => item.name));
     });
   }, [username]);
+
+  useEffect(() => {
+    const payload = JSON.parse(localStorage.getItem(SAVE_KEY));
+
+    console.log('payload', payload);
+  }, []);
 
   useEffect(() => {
     if (!username) {

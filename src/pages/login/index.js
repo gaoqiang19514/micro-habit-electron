@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Button, Input, Typography } from '@douyinfe/semi-ui';
+import { Button, Input, Typography, Toast } from '@douyinfe/semi-ui';
 
 import * as userApi from '@/apis/user';
 import styles from './style.less';
@@ -14,29 +14,23 @@ function Login() {
   const [password, setPassword] = useState('');
   const isDisabled = !username;
 
-  const isExisted = async (username) => {
-    const res = await userApi.list({ username });
-    return res.data.length > 0;
-  };
+  const login = async () => {
+    setLoading(true);
+    const res = await userApi.login({ username, password });
+    const data = await res.json();
+    setLoading(false);
 
-  const login = (username) => {
+    if (!data.data.length) {
+      Toast.error('账号或密码错误');
+      return;
+    }
+
     localStorage.setItem('username', username);
     navigate('/');
   };
 
-  const register = async (username) => {
-    await userApi.add({ username });
-    login(username);
-  };
-
   const onSubmit = async () => {
-    setLoading(true);
-    const isExist = await isExisted(username);
-    if (isExist) {
-      await login(username);
-    } else {
-      await register(username);
-    }
+    login();
   };
 
   return (
