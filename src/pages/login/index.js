@@ -17,16 +17,19 @@ function Login() {
   const login = async () => {
     setLoading(true);
     const res = await userApi.login({ username, password });
-    const data = await res.json();
     setLoading(false);
 
-    if (!data.data.length) {
+    if (res.code !== 0) {
       Toast.error('账号或密码错误');
       return;
     }
 
-    localStorage.setItem('username', username);
-    navigate('/');
+    if (res.code === 0) {
+      localStorage.setItem('token', res.data);
+      // TODO: 接入token后，需要去掉username
+      localStorage.setItem('username', username);
+      navigate('/');
+    }
   };
 
   const onSubmit = async () => {

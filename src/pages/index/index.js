@@ -80,7 +80,7 @@ function App() {
   const [currentName, setCurrentName] = useState('');
   const [currentTime, setCurrentTime] = useState('');
   const [names, setNames] = useState([]);
-  const [times] = useState([5, 10, 15, 20, 25]);
+  const [times] = useState([0.1, 5, 10, 15, 20, 25]);
   const [tasks, setTasks] = useState([]);
   const navigate = useNavigate();
   const username = localStorage.getItem('username') || '';
@@ -103,9 +103,9 @@ function App() {
         username,
         date: now,
       })
-      .then((data) => {
+      .then((res) => {
         /** @type {Record[]} */
-        const records = data.data;
+        const records = res.data;
         /** @type {number} */
         const len = records.length;
 
@@ -197,8 +197,8 @@ function App() {
   };
 
   useEffect(() => {
-    taskApi.list(username).then((data) => {
-      const tasks = data.data;
+    taskApi.list({ username }).then((res) => {
+      const tasks = res.data;
       setTasks(tasks);
       setNames(tasks.map((item) => item.name));
     });
