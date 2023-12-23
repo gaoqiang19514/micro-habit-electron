@@ -98,7 +98,7 @@ function App() {
     const now = formatter(new Date());
 
     recordApi
-      .get({
+      .list({
         name,
         username,
         date: now,

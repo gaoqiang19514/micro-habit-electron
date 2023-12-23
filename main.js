@@ -1,5 +1,10 @@
+const { updateElectronApp } = require('update-electron-app');
 const { app, BrowserWindow, ipcMain, Menu } = require('electron');
 const path = require('node:path');
+
+updateElectronApp({
+  repo: 'https://github.com/gaoqiang19514/micro-habit-electron',
+});
 
 let win = null;
 

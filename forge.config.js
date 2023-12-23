@@ -28,4 +28,18 @@ module.exports = {
       config: {},
     },
   ],
+  publishers: [
+    {
+      name: '@electron-forge/publisher-github',
+      config: {
+        repository: {
+          owner: 'gaoqiang19514',
+          name: 'micro-habit-electron'
+        },
+        prerelease: false,
+        draft: true,
+        authToken: "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"
+      }
+    }
+  ]
 };
