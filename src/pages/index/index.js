@@ -80,7 +80,7 @@ function App() {
   const [currentName, setCurrentName] = useState('');
   const [currentTime, setCurrentTime] = useState('');
   const [names, setNames] = useState([]);
-  const [times] = useState([0.1, 5, 10, 15, 20, 25]);
+  const [times] = useState([5, 10, 15, 20, 25]);
   const [tasks, setTasks] = useState([]);
   const navigate = useNavigate();
   const username = localStorage.getItem('username') || '';
