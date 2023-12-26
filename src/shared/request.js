@@ -8,6 +8,8 @@ const instance = axios.create({
 const request = (query) => {
   const token = localStorage.getItem('token');
 
+  // TODO: 后台抛出的异常在这里处理
+
   return instance({
     headers: {
       token,

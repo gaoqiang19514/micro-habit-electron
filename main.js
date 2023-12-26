@@ -16,12 +16,20 @@ const flashWindow = () => {
 };
 
 const createWindow = () => {
+  let width = 580;
+  let height = 430;
+  let url = 'http://localhost:3000/';
+
   if (app.isPackaged) {
+    width = 560;
+    height = 400;
+    url = 'build/index.html'
     Menu.setApplicationMenu(null)
   }
+
   win = new BrowserWindow({
-    width: 700,
-    height: 450,
+    width,
+    height,
     icon: path.join(__dirname, 'icons/icon.ico'),
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
@@ -32,11 +40,7 @@ const createWindow = () => {
     flashWindow();
   });
 
-  if (app.isPackaged) {
-    win.loadFile('build/index.html');
-  } else {
-    win.loadURL('http://localhost:3000/');
-  }
+  win.loadFile(url);
 };
 
 app.whenReady().then(createWindow);
