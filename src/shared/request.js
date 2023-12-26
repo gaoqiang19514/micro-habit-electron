@@ -5,10 +5,25 @@ const instance = axios.create({
   timeout: 3000,
 });
 
+instance.interceptors.response.use(
+  (response) => {
+    // 如果响应正常，直接返回响应数据
+    return response;
+  },
+  (error) => {
+    if (error.response.status === 401) {
+      // 1. 退出登录
+      // 2. 跳转到登录页面
+    }
+    // 将错误继续传递，以便其他拦截器或调用者处理
+    return Promise.reject(error);
+  }
+);
+
 const request = (query) => {
   const token = localStorage.getItem('token');
 
-  // TODO: 后台抛出的异常在这里处理
+  // TODO: 后台抛出的业务异常在这里处理
 
   return instance({
     headers: {
