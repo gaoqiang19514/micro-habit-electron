@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Form, Button, RadioGroup, Radio, Dropdown } from '@douyinfe/semi-ui';
+import { Form, Button, RadioGroup, Radio, Dropdown, Skeleton } from '@douyinfe/semi-ui';
 
 import * as taskApi from '@/apis/task';
 import * as recordApi from '@/apis/record';
@@ -76,6 +76,7 @@ function App() {
   // 2 倒计时中
   // 3 倒计时结束
   const [status, setStatus] = useState('1');
+  const [loading, setLoading] = useState(true);
   const [countDownSeconds, setCountDownSeconds] = useState(0);
   const [currentName, setCurrentName] = useState('');
   const [currentTime, setCurrentTime] = useState('');
@@ -201,6 +202,7 @@ function App() {
       const tasks = res.data;
       setTasks(tasks);
       setNames(tasks.map((item) => item.name));
+      setLoading(false)
     });
   }, [username]);
 
@@ -232,14 +234,16 @@ function App() {
           value={currentName}
           onChange={(e) => setCurrentName(e.target.value)}
         >
-          {names.map((item) => (
-            <Radio
-              key={item}
-              value={item}
-            >
-              {item}
-            </Radio>
-          ))}
+          <Skeleton style={{ width: 124, height: 32 }} loading={loading} active>
+            {names.map((item) => (
+              <Radio
+                key={item}
+                value={item}
+              >
+                {item}
+              </Radio>
+            ))}
+          </Skeleton>
         </RadioGroup>
       </div>
       <div className={styles.row}>
