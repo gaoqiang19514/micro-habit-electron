@@ -18,12 +18,10 @@ const flashWindow = () => {
 const createWindow = () => {
   let width = 580;
   let height = 430;
-  let url = 'http://localhost:3000/';
 
   if (app.isPackaged) {
     width = 560;
     height = 400;
-    url = 'build/index.html'
     Menu.setApplicationMenu(null)
   }
 
@@ -40,7 +38,11 @@ const createWindow = () => {
     flashWindow();
   });
 
-  win.loadFile(url);
+  if (app.isPackaged) {
+    win.loadFile('build/index.html');
+  } else {
+    win.loadURL('http://localhost:3000/');
+  }
 };
 
 app.whenReady().then(createWindow);
