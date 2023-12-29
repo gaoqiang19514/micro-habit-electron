@@ -26,10 +26,14 @@ const request = (query) => {
   // TODO: 后台抛出的业务异常在这里处理
 
   return instance({
+    ...query,
+    params: {
+      ...query.params,
+      token
+    },
     headers: {
       token,
     },
-    ...query,
   }).then((res) => res.data);
 };
 
