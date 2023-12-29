@@ -40,40 +40,40 @@ export const list = (params) => request({
 
 /**
  * 新增用户
- * @param {Object} data
- * @param {string} data.username
- * @param {string} data.password
+ * @param {Object} params
+ * @param {string} params.username
+ * @param {string} params.password
  * @returns {ApiResponse}
  */
-export const add = (data) => request({
-  method: 'post',
+export const add = (params) => request({
+  method: 'get',
   url: '/user/add',
-  data,
+  params,
 });
 
 /**
  * 登录
- * @param {Object} data
- * @param {string} data.username
- * @param {string} data.password
+ * @param {Object} params
+ * @param {string} params.username
+ * @param {string} params.password
  * @returns {ApiResponse}
  */
-export const login = (data) => request({
-  method: 'post',
+export const login = (params) => request({
+  method: 'get',
   url: '/user/login',
-  data,
+  params,
 });
 
 /**
  * 修改密码
- * @param {Object} data
- * @param {string} data.username
- * @param {string} data.password
- * @param {string} data.newPassword
+ * @param {Object} params
+ * @param {string} params.username
+ * @param {string} params.password
+ * @param {string} params.newPassword
  * @returns {ApiResponse}
  */
-export const updatePassword = (data) => request({
-  method: 'post',
+export const updatePassword = (params) => request({
+  method: 'get',
   url: '/user/updatePassword',
-  data,
+  params,
 });

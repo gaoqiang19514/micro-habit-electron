@@ -24,34 +24,41 @@ import request from '@/shared/request';
 
 /**
  * 新增记录
- * @param {Object} data
- * @param {string} data.username
- * @param {string} data.date
- * @param {string} data.name
- * @param {string} data.value
- * @param {string} data.target
+ * @param {Object} params
+ * @param {string} params.username
+ * @param {string} params.date
+ * @param {string} params.name
+ * @param {string} params.value
+ * @param {string} params.target
  * @returns {ApiResponse}
  */
-export const add = (data) => request({
-  method: 'post',
+export const add = (params) => request({
+  method: 'get',
   url: '/record/add',
-  data,
+  params,
 });
 
 /**
  * 更新记录
- * @param {Object} data
- * @param {string} [data.username]
- * @param {string} [data.date]
- * @param {string} [data.name]
- * @param {string} [data.value]
- * @param {string} [data.target]
+ * @param {Object} params
+ * @param {Object} params.query
+ * @param {string} [params.query.username]
+ * @param {string} [params.query.date]
+ * @param {string} [params.query.name]
+ * @param {string} [params.query.value]
+ * @param {string} [params.query.target]
+ * @param {Object} params.payload
+ * @param {string} [params.payload.username]
+ * @param {string} [params.payload.date]
+ * @param {string} [params.payload.name]
+ * @param {string} [params.payload.value]
+ * @param {string} [params.payload.target]
  * @returns {ApiResponse}
  */
-export const update = (data) => request({
-  method: 'post',
+export const update = (params) => request({
+  method: 'get',
   url: '/record/update',
-  data,
+  params,
 });
 
 /**
