@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, Input, Toast } from '@douyinfe/semi-ui';
+import { IconChevronLeft } from '@douyinfe/semi-icons';
 
 import * as userApi from '@/apis/user';
 import styles from './style.less';
@@ -63,8 +64,13 @@ function Register() {
     setLoading(false);
   };
 
+  const onClickBack = () => {
+    navigate(-1)
+  }
+
   return (
     <div className={styles.container}>
+      <IconChevronLeft className={styles.backBtn} onClick={onClickBack} />
       <h1 className={styles.title}>账号注册</h1>
       <Input
         className={styles.input}
